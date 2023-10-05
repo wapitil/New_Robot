@@ -84,7 +84,7 @@ def LoopForB():
     for i, (servo_number, _, _) in enumerate(servo_data):
         print(f"    pwm2.setServoAngleP2({servo_number}, var{i})")
 
-    print(f"    time.sleep(0.08)")
+    print(f"    time.sleep(0.04)")
 
 
 if __name__ == "__main__":
