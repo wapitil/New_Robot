@@ -16,5 +16,5 @@ def play_audio(audio_file, volume=150):
 
 def begin_show():
     # 开始表演，三 二 一。
-    audio_file = "/home/pi/Desktop/New_Robot/Audio/BeginShow.mp3"
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/BeginShow.mp3"
     play_audio(audio_file)

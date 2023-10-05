@@ -30,6 +30,7 @@ def Magnet_On(flag):
         time.sleep(2)  # 延迟2秒
 
     # 在需要结束时停止PWM和清理GPIO
-    pwm.ChangeDutyCycle(0)
+    # pwm.ChangeDutyCycle(0)
     pwm.stop()
     GPIO.cleanup()
+

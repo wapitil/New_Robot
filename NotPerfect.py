@@ -88,5 +88,8 @@ def LoopForB():
 
 
 if __name__ == "__main__":
-    LoopForB()
-    # LoopForA()
+    board=input("请输入舵机板编号（A为A板,B为B板）：")
+    if board =="A":
+        LoopForA()
+    elif board =="B":
+        LoopForB()

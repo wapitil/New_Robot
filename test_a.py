@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # BigFont()
     # HandsUp()
     # SquatDown()
-    Lunge()
+    # Lunge()
     # HandsOnHips()
     # WaveOneHand()
 
@@ -49,7 +49,18 @@ if __name__ == "__main__":
     # Hats_On()
 
     ## 舞蹈四 ##
-    # DanceFour_1()
+    Hats_On_Hand()
+    begin_show()
+    DanceOwn_1()
+    DanceOwn_2()
+    time.sleep(0.5)
+    DanceOwn_3()
+    DanceOwn_4()
+    DanceOwn_5()
+    time.sleep(0.5)
+    DanceOwn_6()
+    DanceOwn_7()
+  
 
     # GoForward()
     # Back()
