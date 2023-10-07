@@ -26,14 +26,10 @@ if __name__ == "__main__":
     # RaiseLeftHand()
     # LeftFootSupport()
     # RightFootSupport()
-    # TrunLeft_Back()
-    # TurnRight_Back()
-    # TurnLeft(3)
-    # TurnRight(3)
-    MoveLeft(6)
-    # MoveRight(5)
-    # MoveLeft_Back()
-    # MoveRight_Back()
+    # TrunLeft_Back() # check
+    # TurnRight_Back() # check
+    # MoveLeft_Back() # 
+    # MoveRight_Back()  
     # test1()
     # Hats_On()
 
@@ -67,6 +63,7 @@ if __name__ == "__main__":
     
     # test()
 
-    # GoForward()
-    # Back()
+    # GoForward_1(7)
+    # time.sleep(2)
+    # Back_1(7)
     pass

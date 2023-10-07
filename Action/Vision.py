@@ -90,7 +90,7 @@ def CloseLegs():
     setInitialPosition()
 
 
-def HandsUp():
+def HandsUp_Vision():
     '举双手'
     pwm1 = servo.PCA9685(0x40, False)
     pwm1.setPWMFreq(50)

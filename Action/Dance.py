@@ -6,7 +6,32 @@ import numpy as np
 from magnet import *
 import threading
 
+def DanceRequired():
+    '必选'
+    DanceFive_1()
+    time.sleep(0.4)
+    DanceFive_2()
+    time.sleep(0.5)
+    DanceFive_3()
+    time.sleep(0.5)
+    DanceFive_4()
+    Hats_On()
 
+def DanceOwn():
+    '自选'
+    DanceOwn_0()
+    DanceOwn_1()
+    DanceOwn_2()
+    time.sleep(0.5)
+    DanceOwn_3()
+    DanceOwn_4()
+    DanceOwn_5()
+    time.sleep(0.5)
+    DanceOwn_6()
+    DanceOwn_7()
+    MoveRight(6)
+    DanceOwn_end()
+    
 def Hats_On():
     pwm1 = servo.PCA9685(0x40, False)
     pwm1.setPWMFreq(50)
@@ -114,7 +139,6 @@ def Hats_On():
     # for i in range(260, 90, -5):
     #     pwm1.setServoAngleP1(1, i)
     #     time.sleep(0.04)
-
 
 def DanceFive_1():
     '下蹲 前举手 上升 收手 两侧展开45'
@@ -241,7 +265,6 @@ def DanceFive_2():
     time.sleep(1)
     MoveLeftLoop(2)
 
-
 def DanceFive_3():
     '向右倾斜 摆手'
     pwm1 = servo.PCA9685(0x40, False)
@@ -286,7 +309,6 @@ def DanceFive_3():
     pwm1.setServoAngleP2(2, 150)
     pwm1.setServoAngleP2(6, 30)
     time.sleep(1)
-
 
 def DanceFive_4():
     '开合手臂 下蹲上来*3 '
@@ -376,7 +398,6 @@ def DanceFive_4():
             time.sleep(0.04)
 
         time.sleep(0.3)
-
 
 def DanceFour_1():
     '极限下蹲'
@@ -517,7 +538,6 @@ def DanceOwn_0():
         pwm2.setServoAngleP2(6, l)
         pwm2.setServoAngleP2(12, l)
         time.sleep(0.04)
-
 
 def DanceOwn_1():
     ''
@@ -737,7 +757,6 @@ def DanceOwn_4():
         pwm2.setServoAngleP2(10, var4)
         time.sleep(0.05)
 
-
 def DanceOwn_5():
     '新的风暴已经出现'
     pwm2 = servo.PCA9685(0x41, False)
@@ -812,7 +831,6 @@ def DanceOwn_6():
     for var0 in (np.arange(140.0, 220.0, 5.0)):
         pwm1.setServoAngleP1(8, var0)
         time.sleep(0.02)
-
 
 def DanceOwn_7():
     pwm2 = servo.PCA9685(0x41, False)
@@ -962,18 +980,7 @@ def DanceOwn_end():
     pwm1.setServoAngleP1(2, 180)
     pwm1.setServoAngleP1(6, 0)
 
-def test():
-    pwm1 = servo.PCA9685(0x40, False)
-    pwm1.setPWMFreq(50)
-    for var0, var1, var2, var3, var4, var5, var6 in zip(np.arange(180.0, 90.0, -9.0), np.arange(200.0, 180.0, -2.0), np.arange(100.0, 90.0, -1.0), np.arange(0.0, 90.0, 9.0), np.arange(100.0, 90.0, -1.0), np.arange(100.0, 180.0, 8.0), np.arange(180.0, 90.0, -9.0)):
-        pwm1.setServoAngleP1(4, var0)
-        pwm1.setServoAngleP1(2, var1)
-        pwm1.setServoAngleP1(1, var2)
-        pwm1.setServoAngleP1(7, var3)
-        pwm1.setServoAngleP1(1, var4)
-        pwm1.setServoAngleP1(5, var5)
-        pwm1.setServoAngleP1(3, var6)
-        time.sleep(0.02)
+
 
 
     
