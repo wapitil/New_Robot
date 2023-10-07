@@ -266,6 +266,7 @@ def MoveLeft(num):
         pwm2.setServoAngleP2(11, k)
         time.sleep(0.02)
 
+    # 张手
     pwm1.setServoAngleP1(2, 135)
     pwm1.setServoAngleP1(6, 45)
     time.sleep(0.5)
@@ -294,7 +295,10 @@ def MoveLeftLoop(num):
             pwm2.setServoAngleP2(6, i)
             pwm2.setServoAngleP2(12, i-2)
             time.sleep(0.08)
+
         pwm2.setServoAngleP2(12, 75)
+        pwm2.setServoAngleP2(3, 155)
+        pwm2.setServoAngleP2(1, 83)
 
         for i, j in zip(range(75, 70, -1), range(90, 70, -4)):
             pwm2.setServoAngleP2(12, i)
@@ -311,10 +315,14 @@ def MoveLeftLoop(num):
             pwm2.setServoAngleP2(12, l)
             time.sleep(0.05)
 
+        pwm2.setServoAngleP2(1, 80)
+        pwm2.setServoAngleP2(3, 150)
         pwm2.setServoAngleP2(8, 90)
-        pwm2.setServoAngleP2(12, 95)
 
-        pwm2.setServoAngleP2(6, 100)
+        for i,j in zip(range(95,90,-1),np.arange(110,100,-10/5)):
+            pwm2.setServoAngleP2(8, i)
+            pwm2.setServoAngleP2(6, j)
+            time.sleep(0.05)
 
         for i, j in zip(np.arange(100, 95, -0.5), range(110, 90, -2)):
             pwm2.setServoAngleP2(6, i)
@@ -415,12 +423,6 @@ def GoForward():
     pwm2.setPWMFreq(50)
 
     for i in range(3):
-        # for var0, var1 in zip(np.arange(122.0, 120.0, -1.0), np.arange(122.0, 120.0, -1.0)):
-        #     pwm2.setServoAngleP2(4, var0)
-        #     pwm2.setServoAngleP2(10, var1)
-        #     time.sleep(0.06)
-
-        time.sleep(0.5)
 
         for var0, var1, var2 in zip(np.arange(90.0, 76.0, -1.75), np.arange(90.0, 79.0, -1.375), np.arange(70.0, 68.0, -2.0/8)):
             pwm2.setServoAngleP2(6, var0)

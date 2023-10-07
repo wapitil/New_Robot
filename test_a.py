@@ -30,7 +30,7 @@ if __name__ == "__main__":
     # TurnRight_Back()
     # TurnLeft(3)
     # TurnRight(3)
-    # MoveLeft()
+    MoveLeft(6)
     # MoveRight(5)
     # MoveLeft_Back()
     # MoveRight_Back()
@@ -48,19 +48,24 @@ if __name__ == "__main__":
     # DanceFive_4()
     # Hats_On()
 
-    ## 舞蹈四 ##
-    Hats_On_Hand()
-    begin_show()
-    DanceOwn_1()
-    DanceOwn_2()
-    time.sleep(0.5)
-    DanceOwn_3()
-    DanceOwn_4()
-    DanceOwn_5()
-    time.sleep(0.5)
-    DanceOwn_6()
-    DanceOwn_7()
-  
+    ## 自选舞蹈 ##
+    # Hats_On_Hand() # 演示 ,实际不需
+    # begin_show()
+    # DanceOwn_0()
+    # DanceOwn_1()
+    # DanceOwn_2()
+    # time.sleep(0.5)
+    # DanceOwn_3()
+    # DanceOwn_4()
+    # DanceOwn_5()
+    # time.sleep(0.5)
+    # DanceOwn_6()
+    # DanceOwn_7()
+    # MoveRight(6)
+    # DanceOwn_end()
+    
+    
+    # test()
 
     # GoForward()
     # Back()
