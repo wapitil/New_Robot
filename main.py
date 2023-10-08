@@ -85,4 +85,7 @@ def DanceMode():
 
 
 if __name__ == "__main__":
+    ''
+    
+    VisionMode()
     DanceMode()

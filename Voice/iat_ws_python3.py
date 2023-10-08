@@ -1,8 +1,4 @@
 # -*- coding:utf-8 -*-
-#
-#   author: iflytek
-#
-#  本demo测试时运行的环境为：Windows + Python3.7
 #  本demo测试成功运行时所安装的第三方库及其版本如下，您可自行逐一或者复制到一个新的txt文件利用pip一次性安装：
 #   cffi==1.12.3
 #   gevent==1.4.0
@@ -10,17 +6,8 @@
 #   pycparser==2.19
 #   six==1.12.0
 #   websocket==0.2.1
-#   websocket-client==0.56.0
-#
-#  语音听写流式 WebAPI 接口调用示例 接口文档（必看）：https://doc.xfyun.cn/rest_api/语音听写（流式版）.html
-#  webapi 听写服务参考帖子（必看）：http://bbs.xfyun.cn/forum.php?mod=viewthread&tid=38947&extra=
-#  语音听写流式WebAPI 服务，热词使用方式：登陆开放平台https://www.xfyun.cn/后，找到控制台--我的应用---语音听写（流式）---服务管理--个性化热词，
-#  设置热词
-#  注意：热词只能在识别的时候会增加热词的识别权重，需要注意的是增加相应词条的识别率，但并不是绝对的，具体效果以您测试为准。
-#  语音听写流式WebAPI 服务，方言试用方法：登陆开放平台https://www.xfyun.cn/后，找到控制台--我的应用---语音听写（流式）---服务管理--识别语种列表
-#  可添加语种或方言，添加后会显示该方言的参数值
-#  错误码链接：https://www.xfyun.cn/document/error-code （code返回错误码时必看）
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#   websocket-client=0.56.0
+
 import websocket
 import datetime
 import hashlib
@@ -34,7 +21,7 @@ from wsgiref.handlers import format_date_time
 from datetime import datetime
 from time import mktime
 import _thread as thread
-
+import recording
 STATUS_FIRST_FRAME = 0  # 第一帧的标识
 STATUS_CONTINUE_FRAME = 1  # 中间帧标识
 STATUS_LAST_FRAME = 2  # 最后一帧的标识
@@ -96,7 +83,7 @@ class Ws_Param(object):
 def recognize_audio():
     wsParam = Ws_Param(APPID='27240ce9', APISecret='NDU1MDU3ZmQwYTZlODdmZDk1NTllZmE0',
                        APIKey='3ea5d9833cc04a566fdf94b403d16cba',
-                       AudioFile=r'C:\Users\10426\Desktop\Robot\Speech_Recognition\output.wav')
+                       AudioFile=r'/home/pi/Desktop/New_Robot/output.wav')
 
     def on_message(ws, message):
         # 收到websocket消息的处理
@@ -205,6 +192,7 @@ def recognize_audio():
 
 
 def main():
+
     recognize_audio()
     return recognition_result
 

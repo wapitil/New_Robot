@@ -8,6 +8,7 @@ import threading
 
 def DanceRequired():
     '必选'
+    setInitialPosition()
     DanceFive_1()
     time.sleep(0.4)
     DanceFive_2()
