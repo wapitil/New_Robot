@@ -157,6 +157,7 @@ def DanceFive_1():
         pwm2.setServoAngleP2(11, k)
         time.sleep(0.02)
 
+    
     pwm1.setServoAngleP1(1, 135)
     pwm1.setServoAngleP1(5, 135)
     time.sleep(1)
@@ -200,24 +201,23 @@ def DanceFive_1():
     time.sleep(0.5)
 
     # 摆手
-    for i, j in zip(range(180, 89, -5), range(0, 91, 5)):
+    for i, j in zip(range(180, 89, -1), range(0, 91, 1)):
         pwm1.setServoAngleP1(3, i)
         pwm1.setServoAngleP1(7, j)
-        time.sleep(0.03)
-    time.sleep(0.8)
-    for i, j in zip(range(135, 89, -5), range(135, 181, 5)):
+        time.sleep(0.01)
+    time.sleep(0.3)
+    for i, j in zip(range(135, 89, -1), range(135, 181, 1)):
         pwm1.setServoAngleP1(1, i)
         pwm1.setServoAngleP1(5, j)
-        time.sleep(0.03)
-
-    time.sleep(0.8)
+        time.sleep(0.01)
+    time.sleep(0.3)
     for i, j in zip(range(180, 135, -1), range(0, 45)):
         pwm1.setServoAngleP1(2, i)
         pwm1.setServoAngleP1(6, j)
-        time.sleep(0.02)
+        time.sleep(0.01)
 
 def DanceFive_2():
-    '摆手 下蹲 左移两步 摆手可以改进'
+    '摆手 下蹲 前进4次 摆手可以改进'
     pwm1 = servo.PCA9685(0x40, False)
     pwm1.setPWMFreq(50)
     pwm2 = servo.PCA9685(0x41, False)
@@ -241,8 +241,11 @@ def DanceFive_2():
         pwm1.setServoAngleP1(7, j)
         time.sleep(0.01)
 
-    pwm1.setServoAngleP1(1, 90)
-    pwm1.setServoAngleP1(5, 180)
+    
+    for var0, var1 in zip(np.arange(45.0, 90.0, 1.0), np.arange(135.0, 180.0, 1.0)):
+        pwm1.setServoAngleP1(1, var0)
+        pwm1.setServoAngleP1(5, var1)
+        time.sleep(0.01)
     for i in range(45, 90):
         pwm1.setServoAngleP1(3, i)
         pwm1.setServoAngleP1(7, i)
@@ -254,18 +257,22 @@ def DanceFive_2():
         time.sleep(0.02)
     time.sleep(0.5)
 
-    for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
+    GoForwardDance(3)
+
+    kaiheshoubi()
+
+    # 起身
+    for i, j, k in zip(np.arange(150, 105, -1.125), range(200, 120, -2), range(30, 70, 1)):
         pwm2.setServoAngleP2(3, i)
         pwm2.setServoAngleP2(9, i)
         pwm2.setServoAngleP2(4, j)
         pwm2.setServoAngleP2(10, j)
         pwm2.setServoAngleP2(5, k)
         pwm2.setServoAngleP2(11, k)
-        time.sleep(0.01)
-
-    time.sleep(1)
-    MoveLeftLoop(2)
-
+        time.sleep(0.02)
+    
+    GoForwardDance(3)
+    
 def DanceFive_3():
     '向右倾斜 摆手'
     pwm1 = servo.PCA9685(0x40, False)
@@ -311,6 +318,7 @@ def DanceFive_3():
     pwm1.setServoAngleP2(6, 30)
     time.sleep(1)
 
+
 def DanceFive_4():
     '开合手臂 下蹲上来*3 '
     pwm1 = servo.PCA9685(0x40, False)
@@ -318,42 +326,11 @@ def DanceFive_4():
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    pwm1.setServoAngleP1(2, 180)
-    pwm1.setServoAngleP1(6, 0)
-
     for i, j, k, l in zip(range(90, 180, 1*2), range(180, 90, -1*2), range(90, 180, 1*2), range(90, 0, -1*2)):
         pwm1.setServoAngleP1(1, i)
         pwm1.setServoAngleP1(5, j)
         pwm1.setServoAngleP1(3, k)
         pwm1.setServoAngleP1(7, l)
-        time.sleep(0.025)
-
-    for i, j, k in zip(range(180, 90, -1*2), range(0, 90, 1*2), np.arange(90, 30, -(60/90)*2)):
-        pwm1.setServoAngleP1(2, i)
-        pwm1.setServoAngleP1(6, j)
-        pwm1.setServoAngleP1(0, k)
-        time.sleep(0.025)
-
-    time.sleep(0.6)
-
-    for i, j, k in zip(range(90, 180, 1*2), range(90, 0, -1*2), np.arange(30, 90,  (60/90)*2)):
-        pwm1.setServoAngleP1(2, i)
-        pwm1.setServoAngleP1(6, j)
-        pwm1.setServoAngleP1(0, k)
-        time.sleep(0.025)
-
-    for i, j, k in zip(range(180, 90, -1*2), range(0, 90, 1*2), np.arange(90, 150, (60/90)*2)):
-        pwm1.setServoAngleP1(2, i)
-        pwm1.setServoAngleP1(6, j)
-        pwm1.setServoAngleP1(0, k)
-        time.sleep(0.025)
-
-    time.sleep(0.6)
-
-    for i, j, k in zip(range(90, 180, 1*2), range(90, 0, -1*2), np.arange(150, 90, -(60/90)*2)):
-        pwm1.setServoAngleP1(2, i)
-        pwm1.setServoAngleP1(6, j)
-        pwm1.setServoAngleP1(0, k)
         time.sleep(0.025)
 
     pwm1.setServoAngleP1(4, 150)
@@ -400,49 +377,164 @@ def DanceFive_4():
 
         time.sleep(0.3)
 
-def DanceFour_1():
-    '极限下蹲'
+def GoForwardDance(num):
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
     pwm1 = servo.PCA9685(0x40, False)
     pwm1.setPWMFreq(50)
 
-    # 极限下蹲
-    for var0, var1, var2, var3, var4, var5 in zip(np.arange(105, 155, 1), np.arange(105, 155, 1), np.arange(120, 220, (220-120)/45), np.arange(120, 220, (220-120)/45), np.arange(70, 20, -(50/45)), np.arange(70, 20, -(50/45))):
-        pwm2.setServoAngleP2(3, var0)
-        pwm2.setServoAngleP2(9, var1)
-        pwm2.setServoAngleP2(4, var2)
-        pwm2.setServoAngleP2(10, var3)
-        pwm2.setServoAngleP2(5, var4)
-        pwm2.setServoAngleP2(11, var5)
+    # 下蹲
+    for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
+        pwm2.setServoAngleP2(3, i)
+        pwm2.setServoAngleP2(9, i)
+        pwm2.setServoAngleP2(4, j)
+        pwm2.setServoAngleP2(10, j)
+        pwm2.setServoAngleP2(5, k)
+        pwm2.setServoAngleP2(11, k)
         time.sleep(0.02)
 
-    for i, j, k in zip(np.arange(180, 200, 1), np.arange(90, 180, 90/20), np.arange(90, 150, 60/20)):
+    for var0, var1 in zip(np.arange(90.0, 105.0, 1.0), np.arange(90.0, 105.0, 1.0)):
+        pwm2.setServoAngleP2(6, var0)
+        pwm2.setServoAngleP2(12, var1)
+        time.sleep(0.04)
+    
+    for i in range(num):
+        for var0, var1, var2, var3,var4,var5,var6 in zip(np.arange(150.0, 160.0, 1.0), np.arange(30.0, 40.0, 1.0), np.arange(150.0, 135.0, -15/10), np.arange(30.0, 20.0, -1.0),np.arange(150, 180.0, 30/10),np.arange(30, 0,-30/10),np.arange(90, 60.0, -30/10)):
+            pwm2.setServoAngleP2(3, var0)
+            pwm2.setServoAngleP2(5, var1)
+            pwm2.setServoAngleP2(9, var2)
+            pwm2.setServoAngleP2(11, var3)
+            pwm1.setServoAngleP1(2,var4)
+            pwm1.setServoAngleP1(6,var5)
+            pwm1.setServoAngleP1(0,var6)
+            time.sleep(0.02)
+        
+        for var0, var1 in zip(np.arange(105.0, 75.0, -1.0), np.arange(105.0, 75.0, -1.0)):
+            pwm2.setServoAngleP2(6, var0)
+            pwm2.setServoAngleP2(12, var1)
+            time.sleep(0.04)
+
+        for var0, var1, var2, var3,var4,var5,var6 in zip(np.arange(160.0, 140.0, -1.0), np.arange(40.0, 20.0, -1.0), np.arange(135.0, 160.0, 25/20), np.arange(20.0, 40.0, 1.0),np.arange(180.0,150,  -30/20),np.arange(0,30, 30/20),np.arange(60.0,120, 60/20)):
+            pwm2.setServoAngleP2(3, var0)
+            pwm2.setServoAngleP2(5, var1)
+            pwm2.setServoAngleP2(9, var2)
+            pwm2.setServoAngleP2(11, var3)
+            pwm1.setServoAngleP1(2,var4)
+            pwm1.setServoAngleP1(6,var5)
+            pwm1.setServoAngleP1(0,var6)
+            
+            time.sleep(0.02)
+        
+        for var0, var1 in zip(np.arange(75.0, 105.0, 1.0), np.arange(75.0, 105.0, 1.0)):
+            pwm2.setServoAngleP2(6, var0)
+            pwm2.setServoAngleP2(12, var1)
+            time.sleep(0.04)
+        
+        for var0, var1, var2, var3,var4 in zip(np.arange(140.0, 150.0, 1.0), np.arange(20.0, 30.0, 1.0), np.arange(160.0, 150.0, -1), np.arange(40.0, 30.0, -1.0),np.arange(120,90.0, -30/10)):
+            pwm2.setServoAngleP2(3, var0)
+            pwm2.setServoAngleP2(5, var1)
+            pwm2.setServoAngleP2(9, var2)
+            pwm2.setServoAngleP2(11, var3)
+            pwm1.setServoAngleP1(0,var4)
+            time.sleep(0.02)
+
+    for var0, var1 in zip(np.arange(105.0, 90.0, -1.0), np.arange(105.0, 90.0, -1.0)):
+            pwm2.setServoAngleP2(6, var0)
+            pwm2.setServoAngleP2(12, var1)
+            time.sleep(0.04)
+
+def kaiheshoubi():
+
+    pwm2 = servo.PCA9685(0x41, False)
+    pwm2.setPWMFreq(50)
+    pwm1 = servo.PCA9685(0x40, False)
+    pwm1.setPWMFreq(50)
+
+    pwm1.setServoAngleP1(2, 180)
+    pwm1.setServoAngleP1(6, 0)
+
+    for i, j, k, l in zip(range(90, 180, 1*2), range(180, 90, -1*2), range(90, 180, 1*2), range(90, 0, -1*2)):
+        pwm1.setServoAngleP1(1, i)
+        pwm1.setServoAngleP1(5, j)
+        pwm1.setServoAngleP1(3, k)
+        pwm1.setServoAngleP1(7, l)
+        time.sleep(0.025)
+
+    for i, j, k in zip(range(180, 90, -1*2), range(0, 90, 1*2), np.arange(90, 30, -(60/90)*2)):
         pwm1.setServoAngleP1(2, i)
-        pwm1.setServoAngleP1(3, j)
-        pwm1.setServoAngleP1(4, k)
-        time.sleep(0.02)
+        pwm1.setServoAngleP1(6, j)
+        pwm1.setServoAngleP1(0, k)
+        time.sleep(0.025)
 
-    for i, j in zip(np.arange(0, 90, 5), np.arange(90, 151, 60/(90/5))):
-        pwm1.setServoAngleP1(6, i)
-        pwm1.setServoAngleP1(0, j)
-        time.sleep(0.02)
+    time.sleep(0.6)
 
-    for i in range(150, 90, -1):
-        pwm1.setServoAngleP1(0, i)
-        time.sleep(0.02)
+    for i, j, k in zip(range(90, 180, 1*2), range(90, 0, -1*2), np.arange(30, 90,  (60/90)*2)):
+        pwm1.setServoAngleP1(2, i)
+        pwm1.setServoAngleP1(6, j)
+        pwm1.setServoAngleP1(0, k)
+        time.sleep(0.025)
 
-    for i, j in zip(range(90, 50, -2), range(80, 100)):
-        pwm1.setServoAngleP1(0, i)
-        pwm2.setServoAngleP2(1, j)
-        pwm2.setServoAngleP2(7, j)
-        time.sleep(0.02)
+    for i, j, k in zip(range(180, 90, -1*2), range(0, 90, 1*2), np.arange(90, 150, (60/90)*2)):
+        pwm1.setServoAngleP1(2, i)
+        pwm1.setServoAngleP1(6, j)
+        pwm1.setServoAngleP1(0, k)
+        time.sleep(0.025)
 
-    for i, j in zip(np.arange(50, 130, (130-50)/40), range(100, 60, -1)):
-        pwm1.setServoAngleP1(0, i)
-        pwm2.setServoAngleP2(1, j)
-        pwm2.setServoAngleP2(7, j)
-        time.sleep(0.02)
+    time.sleep(0.6)
+
+    for i, j, k in zip(range(90, 180, 1*2), range(90, 0, -1*2), np.arange(150, 90, -(60/90)*2)):
+        pwm1.setServoAngleP1(2, i)
+        pwm1.setServoAngleP1(6, j)
+        pwm1.setServoAngleP1(0, k)
+        time.sleep(0.025)
+
+    for i, j, k, l in zip(range(180,90,  -1*2), range(90,180,  1*2), range(180,90,  -1*2), range(0,90,  1*2)):
+        pwm1.setServoAngleP1(1, i)
+        pwm1.setServoAngleP1(5, j)
+        pwm1.setServoAngleP1(3, k)
+        pwm1.setServoAngleP1(7, l)
+        time.sleep(0.025)
+    
+# def DanceFour_1():
+#     '极限下蹲'
+#     
+
+#     # 极限下蹲
+#     for var0, var1, var2, var3, var4, var5 in zip(np.arange(105, 155, 1), np.arange(105, 155, 1), np.arange(120, 220, (220-120)/45), np.arange(120, 220, (220-120)/45), np.arange(70, 20, -(50/45)), np.arange(70, 20, -(50/45))):
+#         pwm2.setServoAngleP2(3, var0)
+#         pwm2.setServoAngleP2(9, var1)
+#         pwm2.setServoAngleP2(4, var2)
+#         pwm2.setServoAngleP2(10, var3)
+#         pwm2.setServoAngleP2(5, var4)
+#         pwm2.setServoAngleP2(11, var5)
+#         time.sleep(0.02)
+
+#     for i, j, k in zip(np.arange(180, 200, 1), np.arange(90, 180, 90/20), np.arange(90, 150, 60/20)):
+#         pwm1.setServoAngleP1(2, i)
+#         pwm1.setServoAngleP1(3, j)
+#         pwm1.setServoAngleP1(4, k)
+#         time.sleep(0.02)
+
+#     for i, j in zip(np.arange(0, 90, 5), np.arange(90, 151, 60/(90/5))):
+#         pwm1.setServoAngleP1(6, i)
+#         pwm1.setServoAngleP1(0, j)
+#         time.sleep(0.02)
+
+#     for i in range(150, 90, -1):
+#         pwm1.setServoAngleP1(0, i)
+#         time.sleep(0.02)
+
+#     for i, j in zip(range(90, 50, -2), range(80, 100)):
+#         pwm1.setServoAngleP1(0, i)
+#         pwm2.setServoAngleP2(1, j)
+#         pwm2.setServoAngleP2(7, j)
+#         time.sleep(0.02)
+
+#     for i, j in zip(np.arange(50, 130, (130-50)/40), range(100, 60, -1)):
+#         pwm1.setServoAngleP1(0, i)
+#         pwm2.setServoAngleP2(1, j)
+#         pwm2.setServoAngleP2(7, j)
+#         time.sleep(0.02)
 
 def Hats_On_Hand():
     '用来模拟的'

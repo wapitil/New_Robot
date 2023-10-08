@@ -33,9 +33,9 @@ if __name__ == "__main__":
     # test1()
     # Hats_On()
 
-    ## 舞蹈五 ##
+    # 舞蹈五 ##
     # begin_show()
-    # DanceFive_1()
+    # DanceFive_1() # 
     # time.sleep(0.4)
     # DanceFive_2()
     # time.sleep(0.5)
@@ -65,7 +65,6 @@ if __name__ == "__main__":
 
     # GoForward_1(7)
     # time.sleep(2)
-    # Back_1(7)
-    # Back()
-    Back_1(7)
+    # Back(7)
+    # Back_Back()
     pass
