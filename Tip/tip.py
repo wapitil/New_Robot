@@ -14,6 +14,11 @@ def play_audio(audio_file, volume=150):
         print("Error playing audio:", e)
 
 
+def opening():
+    '请选择表演模式'
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/OpenTip.mp3"
+    play_audio(audio_file)
+
 def begin_show():
     '开始表演，三 二 一'
     audio_file = "/home/pi/Desktop/New_Robot/Tip/BeginShow.mp3"
@@ -24,7 +29,16 @@ def middle():
     audio_file = "/home/pi/Desktop/New_Robot/Tip/MiddleTip.mp3"
     play_audio(audio_file)
 
+def ending():
+    # 表演结束，感谢您的观看。
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/EndTip.mp3"
+    play_audio(audio_file)
+
 # 以下为 语音模式所有播报 #
+def voice_mode():
+    # 切换为语音模式。
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/VoiceMode.mp3"
+    play_audio(audio_file)
 
 def lift_lefthand():
     '举 左手'
@@ -108,6 +122,13 @@ def waveonehand():
 
 
 # 以下为舞蹈模式提示词 #
+
+def dance_mode():
+    # 切换为舞蹈模式。
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/DanceMode.mp3"
+    play_audio(audio_file)
+
+
 def song_tip():
     '请 播放第一首音乐'
     audio_file = "/home/pi/Desktop/New_Robot/Tip/SongTip.mp3"
@@ -157,6 +178,9 @@ def song_fail():
     '识别失败，请重新播放音乐'
     audio_file = "/home/pi/Desktop/New_Robot/Tip/SongFail.mp3"
     play_audio(audio_file)
+
+
+
 
 if __name__=="__main__":
     ''

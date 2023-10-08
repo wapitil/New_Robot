@@ -3,13 +3,7 @@ from Servo.servo_init import setInitialPosition
 import time
 import numpy as np
 
-
-def test1():
-    pwm2 = servo.PCA9685(0x41, False)
-    pwm2.setPWMFreq(50)
-    pwm2.setServoAngleP2(1, 100)
-    pwm2.setServoAngleP2(7, 100)
-
+# 自选语音动作未写,举双手未写
 def RaiseLeftHand():
     '举左手'
     pwm1 = servo.PCA9685(0x40, False)
@@ -486,18 +480,7 @@ def Back(num):
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    # 下蹲
-    # for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
-    #     pwm2.setServoAngleP2(3, i)
-    #     pwm2.setServoAngleP2(9, i)
-    #     pwm2.setServoAngleP2(4, j)
-    #     pwm2.setServoAngleP2(10, j)
-    #     pwm2.setServoAngleP2(5, k)
-    #     pwm2.setServoAngleP2(11, k)
-    #     time.sleep(0.02)
 
-    # -------------------------------------------------------------------------- #
-    # 极限下蹲
     for var0, var1, var2, var3, var4, var5 in zip(np.arange(105, 156, 1), np.arange(105, 156, 1), np.arange(120, 220, (220-120)/51), np.arange(120, 220, (220-120)/51), np.arange(70, 20, -(50/51)), np.arange(70, 20, -(50/51))):
         pwm2.setServoAngleP2(3, var0)
         pwm2.setServoAngleP2(9, var1)
@@ -560,6 +543,15 @@ def Back(num):
         time.sleep(0.02)
 
     # -------------------------------------------------------------------------- #
+    # 下蹲(废弃)
+    # for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
+    #     pwm2.setServoAngleP2(3, i)
+    #     pwm2.setServoAngleP2(9, i)
+    #     pwm2.setServoAngleP2(4, j)
+    #     pwm2.setServoAngleP2(10, j)
+    #     pwm2.setServoAngleP2(5, k)
+    #     pwm2.setServoAngleP2(11, k)
+    #     time.sleep(0.02)
     # pwm2.setServoAngleP2(3, 153)
     # pwm2.setServoAngleP2(9, 153)
     # time.sleep(0.2)
@@ -634,7 +626,7 @@ def Back_Back():
     
 
 
-
+#--------------------------------------------------------------------------------#
 # def Back_1(num):
 #     '后退 膝盖反'
 #     pwm1 = servo.PCA9685(0x40, False)

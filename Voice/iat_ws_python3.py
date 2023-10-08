@@ -21,7 +21,8 @@ from wsgiref.handlers import format_date_time
 from datetime import datetime
 from time import mktime
 import _thread as thread
-import recording
+import recording as rec
+
 STATUS_FIRST_FRAME = 0  # 第一帧的标识
 STATUS_CONTINUE_FRAME = 1  # 中间帧标识
 STATUS_LAST_FRAME = 2  # 最后一帧的标识
@@ -192,9 +193,9 @@ def recognize_audio():
 
 
 def main():
-
-    recognize_audio()
-    return recognition_result
+    rec.record_audio(r"/home/pi/Desktop/New_Robot/output.wav", 3)
+    text = recognize_audio()
+    return text
 
 
 if __name__ == "__main__":
