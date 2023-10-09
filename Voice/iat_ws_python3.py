@@ -1,15 +1,5 @@
 # -*- coding:utf-8 -*-
-#  本demo测试成功运行时所安装的第三方库及其版本如下，您可自行逐一或者复制到一个新的txt文件利用pip一次性安装：
-#   cffi==1.12.3
-#   gevent==1.4.0
-#   greenlet==0.4.15
-#   pycparser==2.19
-#   six==1.12.0
-#   websocket==0.2.1
-#   websocket-client=0.56.0
-
 import websocket
-import datetime
 import hashlib
 import base64
 import hmac
@@ -21,14 +11,17 @@ from wsgiref.handlers import format_date_time
 from datetime import datetime
 from time import mktime
 import _thread as thread
-import recording as rec
+import os
+# import recording as rec  
+from Voice import recording as rec
 
 STATUS_FIRST_FRAME = 0  # 第一帧的标识
 STATUS_CONTINUE_FRAME = 1  # 中间帧标识
 STATUS_LAST_FRAME = 2  # 最后一帧的标识
 
 # 用于存储识别结果的全局变量
-recognition_result = None
+recognition_result = ""
+cached_sentence = ""
 
 
 class Ws_Param(object):
@@ -74,10 +67,6 @@ class Ws_Param(object):
         }
         # 拼接鉴权参数，生成url
         url = url + '?' + urlencode(v)
-        # print("date: ",date)
-        # print("v: ",v)
-        # 此处打印出建立连接时候的url,参考本demo的时候可取消上方打印的注释，比对相同参数时生成的url与自己代码生成的url是否一致
-        # print('websocket url :', url)
         return url
 
 
@@ -88,43 +77,34 @@ def recognize_audio():
 
     def on_message(ws, message):
         # 收到websocket消息的处理
-
-        # 在on_message函数中修改处理方式
         global cached_sentence
         global recognition_result
 
         try:
-            # 将接收到的消息字符串解析为 Python 字典,提取状态码和会话ID
             message_data = json.loads(message)
             code = message_data["code"]
             sid = message_data["sid"]
-            # 检查 code 是否为非零值，如果是，则表示识别出现错误。
             if code != 0:
                 errMsg = message_data["message"]
                 print("sid:%s call error:%s code is:%s" % (sid, errMsg, code))
             else:
                 data = message_data["data"]["result"]["ws"]
-                current_sn = message_data["data"]["result"]["sn"]  # 标识当前句子的序号
-                is_last = message_data["data"]["result"]["ls"]  # 是否是句子的最后一部分
+                current_sn = message_data["data"]["result"]["sn"]
+                is_last = message_data["data"]["result"]["ls"]
 
-                # 处理识别结果，迭代 data 中的识别结果，将单词或短语连接起来，形成一个完整的句子。
                 result = ""
                 for i in data:
                     for w in i["cw"]:
                         result += w["w"]
 
-                # 如果是新的句子，将之前缓存的句子加上
                 if current_sn == 1:
                     cached_sentence = result
                 else:
                     cached_sentence += result
 
-                # 如果是句子的最后一部分，返回完整的句子并清空缓存
                 if is_last:
                     complete_sentence = cached_sentence
-                    cached_sentence = ""  # 清空缓存
-                    # process_recognition_result(
-                    #     complete_sentence)  # 调用处理函数处理识别结果
+                    cached_sentence = ""
                     recognition_result = complete_sentence
         except Exception as e:
             print("receive msg, but parse exception:", e)
@@ -137,21 +117,17 @@ def recognize_audio():
 
     def on_open(ws):
         def run(*args):
-            frameSize = 8000  # 每一帧的音频大小
-            intervel = 0.04  # 发送音频间隔(单位:s)
-            status = STATUS_FIRST_FRAME  # 音频的状态信息，标识音频是第一帧，还是中间帧、最后一帧
+            frameSize = 8000
+            intervel = 0.04
+            status = STATUS_FIRST_FRAME
 
             with open(wsParam.AudioFile, "rb") as fp:
                 while True:
                     buf = fp.read(frameSize)
-                    # 文件结束
                     if not buf:
                         status = STATUS_LAST_FRAME
-                    # 第一帧处理
-                    # 发送第一帧音频，带business 参数
-                    # appid 必须带上，只需第一帧发送
-                    if status == STATUS_FIRST_FRAME:
 
+                    if status == STATUS_FIRST_FRAME:
                         d = {"common": wsParam.CommonArgs,
                              "business": wsParam.BusinessArgs,
                              "data": {"status": 0, "format": "audio/L16;rate=16000",
@@ -160,13 +136,11 @@ def recognize_audio():
                         d = json.dumps(d)
                         ws.send(d)
                         status = STATUS_CONTINUE_FRAME
-                    # 中间帧处理
                     elif status == STATUS_CONTINUE_FRAME:
                         d = {"data": {"status": 1, "format": "audio/L16;rate=16000",
                                       "audio": str(base64.b64encode(buf), 'utf-8'),
                                       "encoding": "raw"}}
                         ws.send(json.dumps(d))
-                    # 最后一帧处理
                     elif status == STATUS_LAST_FRAME:
                         d = {"data": {"status": 2, "format": "audio/L16;rate=16000",
                                       "audio": str(base64.b64encode(buf), 'utf-8'),
@@ -174,13 +148,11 @@ def recognize_audio():
                         ws.send(json.dumps(d))
                         time.sleep(1)
                         break
-                    # 模拟音频采样间隔
                     time.sleep(intervel)
             ws.close()
 
         thread.start_new_thread(run, ())
 
-    # 创建WebSocket连接并运行
     wsUrl = wsParam.create_url()
     websocket.enableTrace(False)
     ws = websocket.WebSocketApp(
@@ -188,22 +160,15 @@ def recognize_audio():
     ws.on_open = on_open
     ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
 
-    # 返回识别结果或其他需要的信息
-    return None
+    return recognition_result
 
 
 def main():
     rec.record_audio(r"/home/pi/Desktop/New_Robot/output.wav", 3)
     text = recognize_audio()
+    # print(text)
     return text
 
 
 if __name__ == "__main__":
-    # 创建WebSocket连接并运行
-    time1 = time.time()
-    recognize_audio()
-
-    # 在这里可以使用 recognition_result 来获取识别结果
-    print("获取识别结果:", recognition_result)
-    time2 = time.time()
-    print(time2-time1)
+    main()

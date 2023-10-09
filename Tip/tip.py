@@ -30,13 +30,13 @@ def middle():
     play_audio(audio_file)
 
 def ending():
-    # 表演结束，感谢您的观看。
+    '表演结束，感谢您的观看。'
     audio_file = "/home/pi/Desktop/New_Robot/Tip/EndTip.mp3"
     play_audio(audio_file)
 
 # 以下为 语音模式所有播报 #
 def voice_mode():
-    # 切换为语音模式。
+    '切换为语音模式。'
     audio_file = "/home/pi/Desktop/New_Robot/Tip/VoiceMode.mp3"
     play_audio(audio_file)
 
@@ -80,7 +80,15 @@ def turn_right():
     audio_file = "/home/pi/Desktop/New_Robot/Tip/TurnRight.mp3"
     play_audio(audio_file)
 
+def leftfootsupport():
+    '左脚撑'
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/LeftFootSupport.mp3"
+    play_audio(audio_file)
 
+def rightfootsupport():
+    '右脚撑'
+    audio_file = "/home/pi/Desktop/New_Robot/Tip/RightFootSupport.mp3"
+    play_audio(audio_file)
 
 # 以下为 视觉模式提示词 #
 def camera_init():

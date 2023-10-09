@@ -15,51 +15,39 @@ def VoiceMode():
         print(command)
         if command == "举左手。":
             lift_lefthand()
-            RaiseLeftHand()
-            middle()
+            # RaiseLeftHand()
         elif command == "举双手。":
             lift_hands()
-            # 没写
-            middle()
+            # 没写动作
         elif command == "左移。"or command=="左一":
             move_left()
-            MoveLeft_Back()
-            middle()
+            # MoveLeft_Back()
         elif command == "右移。"or command == "右一。":
             move_right()
-            MoveRight_Back()
-            middle()
+            # MoveRight_Back()
         elif command == "向左转。":
-            turn_left(9)
-            TrunLeft_Back()
-            middle()
+            turn_left()
+            # TrunLeft_Back()
         elif command == "向右转。":
             turn_right()
-            TurnRight_Back()
-            middle()
+            # TurnRight_Back()
         elif command == "左脚撑。":
-            # 没写语音提示
-            LeftFootSupport()
-            middle()
+            leftfootsupport()
+            # LeftFootSupport()
         elif command == "右脚撑。":
-            # 没写语音提示
-            RightFootSupport()
-            middle()
+            rightfootsupport()
+            # RightFootSupport()
         elif command == "前进。":
             forword()
-            GoForward_Back()
-            middle()
+            # GoForward_Back()
         elif command == "后退。":
             backword()
-            Back_Back()
-            middle()
+            # Back_Back()
         elif command == "自选动作":
             ''
         elif command == "结束表演。":
             ending()
             break
-        else:
-            middle()
 
     pass
 
@@ -87,7 +75,6 @@ def DanceMode():
         if music == "Cheap Thrills":
             '第一首音乐'
             music_one() 
-
             begin_show()
             DanceRequired()
             end.append(1)
@@ -145,10 +132,12 @@ if __name__ == "__main__":
         opening()
         command=iat.main()
         print(command)
-        if command == "视觉模式":
+        if command == "视觉模式。":
             VisionMode()
             '未决定是否应该通过倒数的方式切换模式'
             DanceMode()
+        elif command =="语音模式。":
+            VoiceMode()
         elif command == "结束表演。":  # 当识别语音为结束时，播报结束提示音并结束整个程序
             ending()
             break
