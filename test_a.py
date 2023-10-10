@@ -41,30 +41,11 @@ if __name__ == "__main__":
     
     # 舞蹈五 ##
     # begin_show()
-    # DanceFive_1() # 
-    # time.sleep(0.4)
-    # DanceFive_2()
-    # time.sleep(0.5)
-    # DanceFive_3()
-    # time.sleep(0.5)
-    # DanceFive_4()
-    # Hats_On()
+    # DanceRequired()
 
     ## 自选舞蹈 ##
     # Hats_On_Hand() # 演示 ,实际不需
-    # begin_show()
-    # DanceOwn_0()
-    # DanceOwn_1()
-    # DanceOwn_2()
-    # time.sleep(0.5)
-    # DanceOwn_3()
-    # DanceOwn_4()
-    # DanceOwn_5()
-    # time.sleep(0.5)
-    # DanceOwn_6()
-    # DanceOwn_7()
-    # MoveRight(6)
-    # DanceOwn_end()
+    # DanceOwn()
     
     
     # test()

@@ -7,8 +7,7 @@ from magnet import *
 import threading
 
 def DanceRequired():
-    '必选'
-    setInitialPosition()
+    '必选舞蹈'
     DanceFive_1()
     time.sleep(0.4)
     DanceFive_2()
@@ -19,7 +18,7 @@ def DanceRequired():
     Hats_On()
 
 def DanceOwn():
-    '自选'
+    '自选舞蹈'
     DanceOwn_0()
     DanceOwn_1()
     DanceOwn_2()

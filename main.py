@@ -104,6 +104,8 @@ def VisionMode():
 
 def DanceMode():
     end = []
+    setInitialPosition()
+    time.sleep(1)
     song_tip()
     while True:
         # print(f"end={len(end)}") #　检验有几首歌播放了
