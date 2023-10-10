@@ -3,7 +3,60 @@ from Servo.servo_init import setInitialPosition
 import time
 import numpy as np
 
-# 自选语音动作未写,举双手未写
+
+def TrapeziusArm():
+    '斜展臂'
+    pwm1 = servo.PCA9685(0x40, False)
+    pwm1.setPWMFreq(50)
+
+    for var0, var1, var2 in zip(np.arange(90.0, 260.0, 3.7777777777777777), np.arange(180.0, 135.0, -1.0), np.arange(0.0, 45.0, 1.0)):
+        pwm1.setServoAngleP1(1, var0)
+        pwm1.setServoAngleP1(2, var1)
+        pwm1.setServoAngleP1(6, var2)
+        time.sleep(0.03)
+
+    time.sleep(2)
+    for var0, var1, var2 in zip(np.arange(260.0, 90.0, -3.7777777777777777), np.arange(135.0, 180.0, 1.0), np.arange(45.0, 0.0, -1.0)):
+        pwm1.setServoAngleP1(1, var0)
+        pwm1.setServoAngleP1(2, var1)
+        pwm1.setServoAngleP1(6, var2)
+        time.sleep(0.03)
+
+def TouchHead():
+    '摸头'
+    pwm1 = servo.PCA9685(0x40, False)
+    pwm1.setPWMFreq(50)
+    for var0, var1, var2 in zip(np.arange(90.0, 260.0, 8.5), np.arange(180.0, 200.0, 1.0), np.arange(90.0, 150.0, 3.0)):
+        pwm1.setServoAngleP1(1, var0)
+        pwm1.setServoAngleP1(2, var1)
+        pwm1.setServoAngleP1(4, var2)
+        time.sleep(0.04)
+
+    time.sleep(2)
+    for var0, var1, var2 in zip(np.arange(260.0, 90.0, -8.5), np.arange(200.0, 180.0, -1.0), np.arange(150.0, 90.0, -3.0)):
+        pwm1.setServoAngleP1(1, var0)
+        pwm1.setServoAngleP1(2, var1)
+        pwm1.setServoAngleP1(4, var2)
+        time.sleep(0.04)
+
+def HandsForward():
+    '双手前举'
+    pwm1 = servo.PCA9685(0x40, False)
+    pwm1.setPWMFreq(50)
+    for var0, var1, var2, var3 in zip(np.arange(90.0, 180.0, 1.0), np.arange(90.0, 0.0, -1.0), np.arange(90.0, 180.0, 1.0), np.arange(180.0, 90.0, -1.0)):
+        pwm1.setServoAngleP1(3, var0)
+        pwm1.setServoAngleP1(7, var1)
+        pwm1.setServoAngleP1(1, var2)
+        pwm1.setServoAngleP1(5, var3)
+        time.sleep(0.02)
+    time.sleep(2)
+    for var0, var1, var2, var3 in zip(np.arange(180.0, 90.0, -1.0), np.arange(0.0, 90.0, 1.0), np.arange(180.0, 90.0, -1.0), np.arange(90.0, 180.0, 1.0)):
+        pwm1.setServoAngleP1(3, var0)
+        pwm1.setServoAngleP1(7, var1)
+        pwm1.setServoAngleP1(1, var2)
+        pwm1.setServoAngleP1(5, var3)
+        time.sleep(0.02)
+
 def RaiseLeftHand():
     '举左手'
     pwm1 = servo.PCA9685(0x40, False)
@@ -20,6 +73,25 @@ def RaiseLeftHand():
         pwm1.setServoAngleP1(5, j)
         time.sleep(0.02)
 
+def HandsUp_Voice():
+    '举双手'
+    pwm1 = servo.PCA9685(0x40, False)
+    pwm1.setPWMFreq(50)
+    #
+    for i, j in zip(range(90, 271, 5), range(180, 0, -5)):
+        pwm1.setServoAngleP1(1, i)
+        pwm1.setServoAngleP1(5, j)
+        time.sleep(0.04)
+
+    time.sleep(2)
+
+    for i, j in zip(range(271, 89, -2), range(0, 181, 2)):
+        pwm1.setServoAngleP1(1, i)
+        pwm1.setServoAngleP1(5, j)
+        time.sleep(0.02)
+
+
+    
 def LeftFootSupport():
     '左脚撑 左脚站立'
     pwm1 = servo.PCA9685(0x40, False)
@@ -27,7 +99,9 @@ def LeftFootSupport():
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    pwm2.setServoAngleP2(6, 110)
+    for i in range(90,110):
+        pwm2.setServoAngleP2(6, i)
+        time.sleep(0.02)
 
     for i, j in zip(range(90, 101, 1), np.arange(90, 100, 1)):
         pwm2.setServoAngleP2(2, i)
@@ -70,11 +144,14 @@ def RightFootSupport():
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    pwm2.setServoAngleP2(12, 80)
+    for i in range(90,80,-1):
+        pwm2.setServoAngleP2(12, i)
+        time.sleep(0.02)
 
-    for i, j in zip(range(90, 79, -1), np.arange(90, 79, -1)):
+    for i, j,k in zip(range(90, 79, -1), np.arange(90, 79, -1),np.arange(105,110,5/10)):
         pwm2.setServoAngleP2(2, i)
         pwm2.setServoAngleP2(8, i)
+        pwm2.setServoAngleP2(3,k)
         # pwm2.setServoAngleP2(12, i)
         pwm2.setServoAngleP2(6, j)
         time.sleep(0.04)
@@ -92,11 +169,12 @@ def RightFootSupport():
         pwm2.setServoAngleP2(2, i)
         time.sleep(0.02)
 
-    for i, j, k, l in zip(np.arange(145, 105, -1), range(200, 120, -2), range(30, 70, 1), np.arange(74, 85, 0.275)):
+    for i, j, k, l,x in zip(np.arange(145, 105, -1), range(200, 120, -2), range(30, 70, 1), np.arange(74, 85, 0.275),np.arange(110,105,-5/40)):
         pwm2.setServoAngleP2(9, i)
         pwm2.setServoAngleP2(10, j)
         pwm2.setServoAngleP2(11, k)
         pwm2.setServoAngleP2(6, l)
+        # pwm2.setServoAngleP2(3,x)
         time.sleep(0.02)
 
     pwm2.setServoAngleP2(6, 85)
@@ -115,7 +193,7 @@ def TurnLeft(num):
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
+    for i, j, k in zip(np.arange(105, 152, (152-105)/40), range(120, 200, 2), range(70, 30, -1)):
         pwm2.setServoAngleP2(3, i)
         pwm2.setServoAngleP2(9, i)
         pwm2.setServoAngleP2(4, j)
@@ -136,7 +214,7 @@ def TurnLeft(num):
         time.sleep(0.3)
         pwm2.setServoAngleP2(11, 30)
 
-        for i, j, k, l in zip(np.arange(80, 105, 1.25), np.arange(150, 153, 0.15), range(200, 220), np.arange(30, 40, 0.5)):
+        for i, j, k, l in zip(np.arange(80, 105, 1.25), np.arange(152, 153, 1/20), range(200, 220), np.arange(30, 40, 0.5)):
             pwm2.setServoAngleP2(6, i)
             pwm2.setServoAngleP2(12, i)
             pwm2.setServoAngleP2(3, j)
@@ -173,7 +251,8 @@ def TurnRight(num):
     pwm2 = servo.PCA9685(0x41, False)
     pwm2.setPWMFreq(50)
 
-    for i, j, k in zip(np.arange(105, 150, 1.125), range(120, 200, 2), range(70, 30, -1)):
+    # 下蹲
+    for i, j, k in zip(np.arange(105, 152, (152-105)/40), range(120, 200, 2), range(70, 30, -1)):
         pwm2.setServoAngleP2(3, i)
         pwm2.setServoAngleP2(9, i)
         pwm2.setServoAngleP2(4, j)
@@ -192,7 +271,7 @@ def TurnRight(num):
         time.sleep(0.5)
         pwm2.setServoAngleP2(5, 30)
 
-        for i, j, k, l in zip(np.arange(105, 80, -1.25), np.arange(150, 157, 0.35), range(200, 220), np.arange(30, 40, 0.5)):
+        for i, j, k, l in zip(np.arange(105, 78, -(105-78)/20), np.arange(152, 157, 5/20), range(200, 220), np.arange(30, 40, 10/20)):
             pwm2.setServoAngleP2(6, i)
             pwm2.setServoAngleP2(12, i)
             pwm2.setServoAngleP2(3, j)

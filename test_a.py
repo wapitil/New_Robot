@@ -16,23 +16,29 @@ if __name__ == "__main__":
 
     ## 视觉 ##
     # BigFont()
-    # HandsUp()
+    # HandsUp_Vision()
     # SquatDown()
     # Lunge()
+
     # HandsOnHips()
     # WaveOneHand()
 
     ## 语音 ##
     # RaiseLeftHand()
-    # LeftFootSupport()
-    # RightFootSupport()
-    # TrunLeft_Back() # check
+    # HandsUp_Voice()
+    # LeftFootSupport() 
+    # RightFootSupport() # 有问题
+    # TrunLeft_Back() 
     # TurnRight_Back() # check
     # MoveLeft_Back() # 
-    # MoveRight_Back()  
-    # test1()
-    # Hats_On()
+    # MoveRight_Back()  # 现场调
+    # GoForward_Back()
+    # Back_Back()
 
+    # TrapeziusArm()
+    # TouchHead()
+    # HandsForward()
+    
     # 舞蹈五 ##
     # begin_show()
     # DanceFive_1() # 
@@ -63,8 +69,4 @@ if __name__ == "__main__":
     
     # test()
 
-    # GoForward_1(7)
-    # time.sleep(2)
-    # Back(7)
-    # Back_Back()
     pass

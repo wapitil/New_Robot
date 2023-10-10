@@ -3,7 +3,6 @@ from Servo.servo_init import setInitialPosition
 import time
 import numpy as np
 
-# 视觉环境未部署
 def BigFont():
     '大字站'
     pwm1 = servo.PCA9685(0x40, False)
